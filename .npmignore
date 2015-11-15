@@ -1,7 +1,6 @@
 .editorconfig
 .gitignore
 /artifacts/
-/bin/
 /build/
 /coverage/
 /docs/
