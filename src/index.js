@@ -59,6 +59,7 @@ function outputPrice() {
         } else {
             console.log('\tCNY/USD based on BTC = ' + results[0].cny_usd_btc.toFixed(4));
         }
+        console.log('Data provided by coindesk.com and Yahoo! Finance.\n'.gray)
     });
 }
 
