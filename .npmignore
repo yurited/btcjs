@@ -1,0 +1,11 @@
+.editorconfig
+.gitignore
+/artifacts/
+/bin/
+/build/
+/coverage/
+/docs/
+Gruntile.js
+/tests/
+lcov-*
+xunit*

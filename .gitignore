@@ -1,0 +1,7 @@
+/coverage/
+/artifacts/
+/build/
+/node_modules/
+/results/
+npm-*.log
+*-debug.log

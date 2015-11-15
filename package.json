@@ -1,0 +1,29 @@
+{
+  "name": "btcjs",
+  "version": "0.0.1",
+  "description": "Easy to use command line tool for checking bitcoin price",
+  "main": "./src/index.js",
+  "bin": {
+    "btc": "./bin/btc.js"
+  },
+  "contributors": [
+    {
+      "name": "Yuri",
+      "email": "yuri.ted@gmail.com"
+    }
+  ],
+  "scripts": {
+    "test": "",
+    "cover": "",
+    "lint": ""
+  },
+  "dependencies": {
+    "async": "^1.5.0",
+    "colors": "^1.1.2"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "bitcoin"
+  ],
+  "license": "MIT"
+}
