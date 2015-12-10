@@ -34,7 +34,7 @@ function outputPrice() {
         function(cb) {
             http.get({
                 host: 'query.yahooapis.com',
-                path: '/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22USDCNY%22)&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys'
+                path: '/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22USDCNY%22)&format=json&diagnostics=false&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys'
             }, function(response) {
                 var body = '';
                 response.on('data', function(d) {
