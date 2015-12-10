@@ -55,8 +55,8 @@ function outputPrice() {
         var isUp = diff >= 0;
         diff = ('(' + (isUp ? '+' + diff.toFixed(2) : diff.toFixed(2)) + '%)');
         diff = isUp ? diff : diff.red;
-        console.log('\tCNY = ' + results[0].cny);
-        console.log('\tUSD = ' + colors.black.bgGreen(results[0].usd));
+        console.log('\tCNY = ¥ ' + results[0].cny + ' / BTC');
+        console.log('\tUSD = $ ' + colors.black.bgGreen(results[0].usd) + ' / BTC');
         console.log('\tCNY/USD = ' + results[1]);
         console.log(
             '\tCNY/USD based on BTC = ' +
