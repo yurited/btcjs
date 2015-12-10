@@ -1,6 +1,6 @@
 {
   "name": "btcjs",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Easy to use command line tool for checking bitcoin price",
   "main": "./src/index.js",
   "bin": {
