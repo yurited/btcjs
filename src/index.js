@@ -51,17 +51,25 @@ function outputPrice() {
     ], function(err, results) {
         var cny_usd = parseFloat(results[1]);
         var cny_usd_btc = results[0].cny_usd_btc;
+        var diff = (cny_usd_btc / cny_usd - 1) * 100;
+        var isUp = diff >= 0;
+        diff = ('(' + (isUp ? '+' + diff.toFixed(2) : diff.toFixed(2)) + '%)');
+        diff = isUp ? diff : diff.red;
         console.log('\tCNY = ' + results[0].cny);
         console.log('\tUSD = ' + colors.black.bgGreen(results[0].usd));
         console.log('\tCNY/USD = ' + results[1]);
-        if (cny_usd_btc <= cny_usd + 0.01) {
-            console.log('\tCNY/USD based on BTC = ' + results[0].cny_usd_btc.toFixed(4).red);
-        } else {
-            console.log('\tCNY/USD based on BTC = ' + results[0].cny_usd_btc.toFixed(4));
-        }
+        console.log(
+            '\tCNY/USD based on BTC = ' +
+            results[0].cny_usd_btc.toFixed(4) + ' ' +
+            diff
+        );
+        // if (cny_usd_btc <= cny_usd + 0.01) {
+        //     console.log('\tCNY/USD based on BTC = ' + results[0].cny_usd_btc.toFixed(4).red);
+        // } else {
+        //     console.log('\tCNY/USD based on BTC = ' + results[0].cny_usd_btc.toFixed(4));
+        // }
         console.log('Data provided by coindesk.com and Yahoo! Finance.\n'.gray)
     });
 }
 
 exports.outputPrice = outputPrice;
-
