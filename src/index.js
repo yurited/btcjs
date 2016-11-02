@@ -5,6 +5,7 @@
 var http = require('http');
 var async = require('async');
 var colors = require('colors');
+var getObjValue = require('../lib/get_obj_value');
 
 
 function outputPrice() {
@@ -20,8 +21,12 @@ function outputPrice() {
                 });
                 response.on('end', function() {
                     var parsed = JSON.parse(body);
-                    var USD = parsed.bpi.USD.rate_float;
-                    var CNY = parsed.bpi.CNY.rate_float;
+                    var USD = getObjValue(parsed, ['bpi', 'USD', 'rate_float']);
+                    var CNY = getObjValue(parsed, ['bpi', 'CNY', 'rate_float']);
+                    if (!USD || !CNY) {
+                        cb('Data error from coindesk.', null);
+                        return;
+                    }
                     var ret = {
                         usd: USD,
                         cny: CNY,
@@ -42,13 +47,21 @@ function outputPrice() {
                 });
                 response.on('end', function() {
                     var parsed = JSON.parse(body);
-                    var ret = parsed.query.results.rate.Rate;
+                    var ret = getObjValue(parsed, ['query', 'results', 'rate', 'Rate']);
+                    if (!ret) {
+                        cb('Data error from yahoo.', null);
+                        return;
+                    }
                     cb(null, ret);
                 });
             });
 
         }
     ], function(err, results) {
+        if (err) {
+            console.error('Failed.', err);
+            return;
+        }
         var cny_usd = parseFloat(results[1]);
         var cny_usd_btc = results[0].cny_usd_btc;
         var diff = (cny_usd_btc / cny_usd - 1) * 100;
