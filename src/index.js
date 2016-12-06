@@ -25,19 +25,24 @@ let coindeskService = (cb) => {
             body += data;
         });
         response.on('end', () => {
-            let parsed = JSON.parse(body);
-            let USD = getObjValue(parsed, ['bpi', 'USD', 'rate_float']);
-            let CNY = getObjValue(parsed, ['bpi', 'CNY', 'rate_float']);
-            if (!USD || !CNY) {
+            try {
+                let parsed = JSON.parse(body);
+                let USD = getObjValue(parsed, ['bpi', 'USD', 'rate_float']);
+                let CNY = getObjValue(parsed, ['bpi', 'CNY', 'rate_float']);
+                if (!USD || !CNY) {
+                    cb('Data error from coindesk.', null);
+                    return;
+                }
+                let ret = {
+                    usd: USD,
+                    cny: CNY,
+                    cny_usd_btc: CNY / USD
+                };
+                cb(null, ret);
+            } catch (e) {
                 cb('Data error from coindesk.', null);
-                return;
             }
-            let ret = {
-                usd: USD,
-                cny: CNY,
-                cny_usd_btc: CNY / USD
-            };
-            cb(null, ret);
+
         });
     }).on('error', (err) => {
         cb('Request failed from coindesk api.', null);
@@ -63,13 +68,17 @@ let yahooService = (cb) => {
             body += data;
         });
         response.on('end', () => {
-            let parsed = JSON.parse(body);
-            let ret = getObjValue(parsed, ['query', 'results', 'rate', 'Rate']);
-            if (!ret) {
-                cb('Data error from yahoo.', null);
-                return;
+            try{
+                let parsed = JSON.parse(body);
+                let ret = getObjValue(parsed, ['query', 'results', 'rate', 'Rate']);
+                if (!ret) {
+                    cb('Data error from yahoo.', null);
+                    return;
+                }
+                cb(null, ret);
+            } catch (e) {
+                cb('Data error from coindesk.', null);
             }
-            cb(null, ret);
         });
     }).on('error', (err) => {
         cb('Request failed from yahoo api.', null);
