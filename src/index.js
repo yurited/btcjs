@@ -1,4 +1,6 @@
 'use strict';
+// localbitcoin
+// https://localbitcoins.com/buy-bitcoins-online/CNY/alipay/.json
 
 var http = require('http');
 var async = require('async');
